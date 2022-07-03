@@ -6,7 +6,7 @@
 #    By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/01 13:52:25 by fael-bou          #+#    #+#              #
-#    Updated: 2022/07/02 20:01:25 by fael-bou         ###   ########.fr        #
+#    Updated: 2022/07/03 14:31:57 by fael-bou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,6 @@ BUILD_DIR = build
 MANDATORY_OBJ = main.o
 
 M_OBJ = $(addprefix $(BUILD_DIR)/, $(MANDATORY_OBJ))
-
-test :
-	echo $(M_OBG)
 
 NAME = philosophers
 

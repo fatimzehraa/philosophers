@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/06 19:45:59 by fael-bou         ###   ########.fr       */
+/*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
+/*   Updated: 2022/07/06 20:44:48 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-
-int main (int ac, char *av[])
+#include <pthread.h>
+#include <stdlib.h>
+int ok = 1;
+void	routine(void)
 {
-	t_ctx ctx;
-	t_philo philosopher;
-	if(test_args(ac, av) == 0)
-		return (1);
-	get_args(&ctx, ac, av);
-	create_philosophers(&ctx, &philosopher);
-//	run_philosophers();
-	printf("%d\n",ft_atoi("1234"));
-	return 0;
+	ok++;
 }
+
+void	create_philosophers(t_ctx *ctx, t_philo *philosopher)
+{
+	int i;
+
+	philosopher = malloc(ctx->forks * sizeof(t_philo));
+	i = 0;
+	while (i < ctx->forks)
+	{
+		philosopher[i].name = i + 1;
+		pthread_create(&philosopher[i].thread, NULL, &routine, NULL);
+		i++;
+	}
+}
+
+pthread_t tread;

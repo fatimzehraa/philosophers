@@ -6,11 +6,12 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/06 19:45:59 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:12:09 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stdio.h>
 
 
 int main (int ac, char *av[])

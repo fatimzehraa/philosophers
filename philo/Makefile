@@ -6,15 +6,16 @@
 #    By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/01 13:52:25 by fael-bou          #+#    #+#              #
-#    Updated: 2022/07/03 14:31:57 by fael-bou         ###   ########.fr        #
+#    Updated: 2022/07/07 17:58:19 by ismail           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -pthread
 BUILD_DIR = build
 
-MANDATORY_OBJ = main.o
+MANDATORY_OBJ = main.o libft.o philosophers.o args_control.o
 
 M_OBJ = $(addprefix $(BUILD_DIR)/, $(MANDATORY_OBJ))
 
@@ -23,7 +24,7 @@ NAME = philosophers
 all : $(NAME)
 
 $(NAME) : $(M_OBJ)
-	$(CC) $^ -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
 $(BUILD_DIR)/%.o: %.c
 	mkdir -p $(@D)

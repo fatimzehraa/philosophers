@@ -6,7 +6,7 @@
 #    By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/01 13:52:25 by fael-bou          #+#    #+#              #
-#    Updated: 2022/07/07 17:58:19 by ismail           ###   ########.fr        #
+#    Updated: 2022/07/27 19:02:50 by fatimzehra       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all : $(NAME)
 $(NAME) : $(M_OBJ)
 	$(CC) $(LDFLAGS) $^ -o $@
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.c philosophers.h
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 

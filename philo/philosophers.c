@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/29 20:09:15 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/07/29 20:56:03 by fatimzehra       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,21 @@ void	*routine(void *p)
 	while (1)
 	{
 		printf("%ld philosopher%d is thinking\n", ft_diff_time(start),name);
-		pthread_mutex_lock(&philosopher->right_fork);
-		printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
-		pthread_mutex_lock(philosopher->left_fork);
-		printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start),name);
 		//wait for his left and right forks to be available
+		if (name % 2 == 0)
+		{
+			pthread_mutex_lock(&philosopher->right_fork);
+			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			pthread_mutex_lock(philosopher->left_fork);
+			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+		}
+		else
+		{
+			pthread_mutex_lock(philosopher->left_fork);
+			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			pthread_mutex_lock(&philosopher->right_fork);
+			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+		}
 		//eating
 		printf("%ld philosopher%d is eating\n", ft_diff_time(start), name);
 		usleep(philosopher->ctx->time_to_eat * 1000);

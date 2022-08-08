@@ -6,12 +6,12 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/29 20:56:03 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/08 15:01:31 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <bits/types/struct_timeval.h>
+//#include <bits/types/struct_timeval.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -38,11 +38,13 @@ void	*routine(void *p)
 {
 	t_philo *philosopher;
 	long	start;
+	long	last_meal;
 	int		name;
 
 	philosopher = p;
 	name = philosopher->name;
 	start = philosopher->ctx->start_time;
+	last_meal = 0;
 	//thinking
 	while (1)
 	{
@@ -63,24 +65,25 @@ void	*routine(void *p)
 			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
 		}
 		//eating
-		printf("%ld philosopher%d is eating\n", ft_diff_time(start), name);
+		philosopher->last_meal = ft_diff_time(start);
+		printf("%ld philosopher%d is eating\n", last_meal, name);
 		usleep(philosopher->ctx->time_to_eat * 1000);
 		pthread_mutex_unlock(&philosopher->right_fork);
 		pthread_mutex_unlock(philosopher->left_fork);
 		//sleeping
-		usleep(philosopher->ctx->time_to_sleep * 1000);
 		printf("%ld philosopher%d is sleeping\n", ft_diff_time(start), name);
+		usleep(philosopher->ctx->time_to_sleep * 1000);
 	}
 	return (NULL);
 }
 
-void	create_philosophers(t_ctx *ctx, t_philo *philosophers)
+t_philo	*create_philosophers(t_ctx *ctx, t_philo *philosophers)
 {
 	int i;
 
 	philosophers = malloc(ctx->forks * sizeof(t_philo));
-//	printf("%d\n", ctx->forks);
-
+	if (philosophers == NULL)
+		return (NULL);
 	ctx->start_time = ft_time();
 	i = 0;
 	while (i < ctx->forks)
@@ -96,11 +99,5 @@ void	create_philosophers(t_ctx *ctx, t_philo *philosophers)
 			exit (1);
 		i++;
 	}
-	i = 0;
-	while (i < ctx->forks)
-	{
-		philosophers[i].name = i + 1;
-		pthread_join(philosophers[i].thread, NULL);
-		i++;
-	}
+	return (philosophers);
 }

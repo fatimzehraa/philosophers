@@ -6,23 +6,54 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/28 02:44:48 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/08 18:49:53 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdio.h>
 
+int	check_dead_philo(t_philo *philosophers)
+{
+	long	start;
+	//int		time_to_die;
+	int		is_alive;
+	int		i;
+
+	// 
+	start = philosophers->ctx->start_time;
+	//time_to_die = philosophers->ctx->time_to_die;
+	is_alive = 1;
+	while (is_alive)
+	{
+		i = 0;
+		while (i < philosophers->ctx->forks)
+		{
+			printf("%ld\n", philosophers[i].last_meal);
+			if (philosophers[i].last_meal + philosophers->ctx->time_to_die > ft_diff_time(start))
+			{
+				is_alive = 0;
+				printf("%ld philosopher%d is dead\n", ft_diff_time(start), philosophers[i].name);
+				break ;
+			}
+			i++;
+		}
+	}
+	return (1);
+}
 
 int main (int ac, char *av[])
 {
 	t_ctx		ctx;
-	t_philo		philosopher;
+	t_philo		*philosophers;
 
 	if(test_args(ac - 1, av + 1) == 0)
 		return (-1);
 	get_args(&ctx, ac, av);
-	create_philosophers(&ctx, &philosopher);
+	philosophers = NULL;
+	philosophers = create_philosophers(&ctx, philosophers);
+	if (check_dead_philo(philosophers))
+		return (1);
 //	run_philosophers();
 //	printf("%d\n",ft_atoi("1234"));
 	return 0;

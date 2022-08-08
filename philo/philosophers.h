@@ -6,13 +6,13 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/27 23:48:59 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/08 15:02:43 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <bits/types/struct_timeval.h>
+//#include <bits/types/struct_timeval.h>
 # include<sys/time.h>
 # include<stdio.h>
 # include<stdlib.h>
@@ -37,6 +37,7 @@ typedef struct s_philo {
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
 	t_ctx			*ctx;
+	long			last_meal;
 	
 } t_philo;
 
@@ -45,7 +46,8 @@ int		ft_atoi(char *str);
 int		is_all_number(char **str);
 int		test_args(int ac, char **av);
 void	get_args(t_ctx *ctx, int ac, char **av);
-void	create_philosophers(t_ctx *ctx, t_philo *philosopher);
+long	ft_diff_time(long start_time);
+t_philo	*create_philosophers(t_ctx *ctx, t_philo *philosopher);
 
 #endif // !PHILOSOPHERS_H
 

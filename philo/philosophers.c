@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 15:01:31 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:27:49 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,40 @@ void	*routine(void *p)
 {
 	t_philo *philosopher;
 	long	start;
-	long	last_meal;
 	int		name;
 
 	philosopher = p;
 	name = philosopher->name;
 	start = philosopher->ctx->start_time;
-	last_meal = 0;
+	philosopher->last_meal = 0;
 	//thinking
 	while (1)
 	{
-		printf("%ld philosopher%d is thinking\n", ft_diff_time(start),name);
+		printf("%ld %d is thinking\n", ft_diff_time(start),name);
 		//wait for his left and right forks to be available
 		if (name % 2 == 0)
 		{
 			pthread_mutex_lock(&philosopher->right_fork);
-			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			printf("%ld %d has taken a fork\n", ft_diff_time(start), name);
 			pthread_mutex_lock(philosopher->left_fork);
-			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			printf("%ld %d has taken a fork\n", ft_diff_time(start), name);
 		}
 		else
 		{
 			pthread_mutex_lock(philosopher->left_fork);
-			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			printf("%ld %d has taken a fork\n", ft_diff_time(start), name);
 			pthread_mutex_lock(&philosopher->right_fork);
-			printf("%ld philosopher%d has taken a fork\n", ft_diff_time(start), name);
+			printf("%ld %d has taken a fork\n", ft_diff_time(start), name);
 		}
 		//eating
 		philosopher->last_meal = ft_diff_time(start);
-		printf("%ld philosopher%d is eating\n", last_meal, name);
+		philosopher->meals++;
+		printf("%ld %d is eating\n", philosopher->last_meal, name);
 		usleep(philosopher->ctx->time_to_eat * 1000);
 		pthread_mutex_unlock(&philosopher->right_fork);
 		pthread_mutex_unlock(philosopher->left_fork);
 		//sleeping
-		printf("%ld philosopher%d is sleeping\n", ft_diff_time(start), name);
+		printf("%ld %d is sleeping\n", ft_diff_time(start), name);
 		usleep(philosopher->ctx->time_to_sleep * 1000);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 18:49:53 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:51:48 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,29 @@
 int	check_dead_philo(t_philo *philosophers)
 {
 	long	start;
-	//int		time_to_die;
-	int		is_alive;
+	int		time_to_die;
+	int		has_eaten;
 	int		i;
 
-	// 
 	start = philosophers->ctx->start_time;
-	//time_to_die = philosophers->ctx->time_to_die;
-	is_alive = 1;
-	while (is_alive)
+	time_to_die = philosophers->ctx->time_to_die;
+	while (1)
 	{
+		has_eaten = 1;
 		i = 0;
 		while (i < philosophers->ctx->forks)
 		{
-			printf("%ld\n", philosophers[i].last_meal);
-			if (philosophers[i].last_meal + philosophers->ctx->time_to_die > ft_diff_time(start))
+			if (philosophers[i].last_meal + time_to_die <= ft_diff_time(start))
 			{
-				is_alive = 0;
-				printf("%ld philosopher%d is dead\n", ft_diff_time(start), philosophers[i].name);
-				break ;
+				printf("%ld %d is dead\n", ft_diff_time(start), philosophers[i].name);
+				return 1;
 			}
+			if (philosophers[i].meals < philosophers->ctx->number_of_eating_times)
+				has_eaten = 0;
 			i++;
 		}
+		if (philosophers->ctx->number_of_eating_times != -1 && has_eaten)
+			return (1);
 	}
 	return (1);
 }

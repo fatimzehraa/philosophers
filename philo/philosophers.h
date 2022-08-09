@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 15:02:43 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:25:31 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
@@ -38,6 +38,7 @@ typedef struct s_philo {
 	pthread_mutex_t	*left_fork;
 	t_ctx			*ctx;
 	long			last_meal;
+	int				meals;
 	
 } t_philo;
 

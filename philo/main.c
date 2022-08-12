@@ -6,12 +6,13 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 22:51:48 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:43:48 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdio.h>
+#include <unistd.h>
 
 int	check_dead_philo(t_philo *philosophers)
 {
@@ -24,6 +25,7 @@ int	check_dead_philo(t_philo *philosophers)
 	time_to_die = philosophers->ctx->time_to_die;
 	while (1)
 	{
+		usleep(500);
 		has_eaten = 1;
 		i = 0;
 		while (i < philosophers->ctx->forks)

@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 22:27:49 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:54:51 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 long	ft_time()
 {
@@ -34,6 +35,23 @@ long	ft_diff_time(long start_time)
 	return (timestamp_in_ms);
 }
 
+void	ft_usleep(long time)
+{
+	unsigned int	first_sleep;
+	unsigned int	time_left;
+	long			starting_time;
+
+	starting_time = ft_time();
+	first_sleep = time * 0.95;
+	time_left = time - first_sleep;
+	usleep(first_sleep * 1000);
+	while (time_left)
+	{
+		if (ft_time() - starting_time >= time)
+			break ;
+	}
+}
+
 void	*routine(void *p)
 {
 	t_philo *philosopher;
@@ -45,6 +63,8 @@ void	*routine(void *p)
 	start = philosopher->ctx->start_time;
 	philosopher->last_meal = 0;
 	//thinking
+//	if (philosopher->ctx->forks % 2 == 1 && philosopher->name % 2 == 1)
+//		ft_usleep(1);
 	while (1)
 	{
 		printf("%ld %d is thinking\n", ft_diff_time(start),name);
@@ -67,12 +87,12 @@ void	*routine(void *p)
 		philosopher->last_meal = ft_diff_time(start);
 		philosopher->meals++;
 		printf("%ld %d is eating\n", philosopher->last_meal, name);
-		usleep(philosopher->ctx->time_to_eat * 1000);
+		ft_usleep(philosopher->ctx->time_to_eat);
 		pthread_mutex_unlock(&philosopher->right_fork);
 		pthread_mutex_unlock(philosopher->left_fork);
 		//sleeping
 		printf("%ld %d is sleeping\n", ft_diff_time(start), name);
-		usleep(philosopher->ctx->time_to_sleep * 1000);
+		ft_usleep(philosopher->ctx->time_to_sleep);
 	}
 	return (NULL);
 }

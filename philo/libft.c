@@ -6,11 +6,13 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/05 13:44:07 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:53:16 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <pthread.h>
+#include <sys/_pthread/_pthread_mutex_t.h>
 
 int	ft_atoi(char *str)
 {
@@ -59,4 +61,16 @@ int	is_all_number(char **str)
 		i++;
 	}
 	return (1);
+}
+
+void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep)
+{
+
+	if (philosopher->ctx->stop != 0)
+		return ;
+	pthread_mutex_lock(&philosopher->ctx->printf_lock);
+	printf(string, timestamp, philosopher->name);
+	pthread_mutex_unlock(&philosopher->ctx->printf_lock);
+	if (sleep > 0)
+		ft_usleep(sleep);
 }

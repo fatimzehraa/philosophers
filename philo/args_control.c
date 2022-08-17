@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:45:14 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/07/07 20:14:09 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:53:47 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	test_args(int ac, char **av)
 	}
 	if (! is_all_number(av))
 		return (0);
-	//if (ac == 5) {
-	//	
-	//}
 	return (1);
 }
 
@@ -32,8 +29,9 @@ void	get_args(t_ctx *ctx, int ac, char **av)
 	ctx->time_to_die = ft_atoi(av[2]);
 	ctx->time_to_eat = ft_atoi(av[3]);
 	ctx->time_to_sleep = ft_atoi(av[4]);
+	ctx->stop = 0;
 	if (ac == 5)
-		ctx->number_of_eating_times = -1;
+		ctx->meals_nb = -1;
 	else if (ac == 6)
-		ctx->number_of_eating_times = ft_atoi(av[5]);
+		ctx->meals_nb = ft_atoi(av[5]);
 }

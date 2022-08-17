@@ -6,7 +6,7 @@
 #    By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/01 13:52:25 by fael-bou          #+#    #+#              #
-#    Updated: 2022/07/27 19:02:50 by fatimzehra       ###   ########.fr        #
+#    Updated: 2022/08/17 17:42:51 by fael-bou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -pthread
 BUILD_DIR = build
 
-MANDATORY_OBJ = main.o libft.o philosophers.o args_control.o
+MANDATORY_OBJ = main.o libft.o philosophers.o args_control.o time.o stop_conditions.o
 
 M_OBJ = $(addprefix $(BUILD_DIR)/, $(MANDATORY_OBJ))
 
-NAME = philosophers
+NAME = philo
 
 all : $(NAME)
 

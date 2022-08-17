@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/08 22:25:31 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:37:06 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
@@ -23,12 +23,14 @@
 typedef struct timeval t_timeval;
 
 typedef struct s_ctx {
+	int			stop;
+	long		start_time;
 	int			forks;
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
-	int			number_of_eating_times;
-	long		start_time;
+	int			meals_nb;
+	pthread_mutex_t	printf_lock;
 } t_ctx;
 
 typedef struct s_philo {
@@ -39,7 +41,6 @@ typedef struct s_philo {
 	t_ctx			*ctx;
 	long			last_meal;
 	int				meals;
-	
 } t_philo;
 
 
@@ -47,8 +48,12 @@ int		ft_atoi(char *str);
 int		is_all_number(char **str);
 int		test_args(int ac, char **av);
 void	get_args(t_ctx *ctx, int ac, char **av);
+long	ft_time();
 long	ft_diff_time(long start_time);
-t_philo	*create_philosophers(t_ctx *ctx, t_philo *philosopher);
+void	ft_usleep(long time);
+t_philo	*create_philosophers(t_ctx *ctx);
+int	check_dead_philo(t_philo *philos);
+void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep);
 
 #endif // !PHILOSOPHERS_H
 

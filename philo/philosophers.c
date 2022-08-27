@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/15 17:32:56 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:52:10 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@
 
 void	*routine(void *p)
 {
-	t_philo *philosopher;
+	t_philo *philo;
 	long	start;
 	//int		name;
 
-	philosopher = p;
+	philo = p;
 	//name = philosopher->name;
-	start = philosopher->ctx->start_time;
-	philosopher->last_meal = 0;
+	start = philo->ctx->start_time;
+	philo->last_meal = 0;
 	//thinking
 /*	if (philosopher->ctx->forks % 2 == 1 && philosopher->name % 2 == 1)
 	{
@@ -58,27 +58,27 @@ void	*routine(void *p)
 	}*/
 	while (1)
 	{
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d is thinking\n", -1);
 		//routine_helper(philosopher);
-		if (philosopher->name % 2 == 1)
-			pthread_mutex_lock(&philosopher->right_fork);
+		if (philo->name % 2 == 1)
+			pthread_mutex_lock(&philo->right_fork);
 		else
-			pthread_mutex_lock(philosopher->left_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n", -1);
-		if (philosopher->name % 2 == 1)
-			pthread_mutex_lock(philosopher->left_fork);
+			pthread_mutex_lock(philo->left_fork);
+		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
+		if (philo->name % 2 == 1)
+			pthread_mutex_lock(philo->left_fork);
 		else
-			pthread_mutex_lock(&philosopher->right_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n", -1);
+			pthread_mutex_lock(&philo->right_fork);
+		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
 		//wait for his left and right forks to be available
 		//eating
-		philosopher->last_meal = ft_diff_time(start);
-		philosopher->meals++;
-		ft_printf(philosopher->last_meal, philosopher,"%ld %d is eating\n", philosopher->ctx->time_to_eat);
-		pthread_mutex_unlock(philosopher->left_fork);
-		pthread_mutex_unlock(&philosopher->right_fork);
+		philo->last_meal = ft_diff_time(start);
+		philo->meals++;
+		ft_printf(philo->last_meal, philo,"%ld %d is eating\n", philo->ctx->time_to_eat);
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(&philo->right_fork);
 		//sleeping
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d is sleeping\n", philosopher->ctx->time_to_sleep);
+		ft_printf(ft_diff_time(start), philo,"%ld %d is sleeping\n", philo->ctx->time_to_sleep);
+		ft_printf(ft_diff_time(start), philo,"%ld %d is thinking\n", -1);
 	}
 	return (NULL);
 }

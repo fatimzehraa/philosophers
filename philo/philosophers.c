@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 15:22:58 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/27 22:57:11 by fatimzehra       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,8 @@ void	routine_helper(t_philo *philo)
 	
 //	name = philo->name;
 	start = philo->ctx->start_time;
-	if (philo->name % 2 == 1)
-		pthread_mutex_lock(&philo->right_fork);
-	else
-		pthread_mutex_lock(philo->left_fork);
-	ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
-	if (philo->name % 2 == 1)
-		pthread_mutex_lock(philo->left_fork);
-	else
-		pthread_mutex_lock(&philo->right_fork);
+	pthread_mutex_lock(philo->left_fork);
+	pthread_mutex_lock(&philo->right_fork);
 	ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
 }
 
@@ -44,6 +37,8 @@ void	*routine(void *p)
 	philo = p;
 	start = philo->ctx->start_time;
 	philo->last_meal = 0;
+	if (philo->name % 2 == 1)
+		usleep(100);
 	//thinking
 	while (1)
 	{
@@ -61,20 +56,7 @@ void	*routine(void *p)
 	return (NULL);
 }
 
-void	detach_philos(t_philo *philos)
-{
-	int	i;
-
-	i = 0;
-	while (i < philos->ctx->forks)
-	{
-		pthread_detach(philos[i].thread);
-		i++;
-	}
-	free(philos);
-}
-
-t_philo	*create_philosophers(t_ctx *ctx)
+t_philo	*create_forks(t_ctx *ctx)
 {
 	int i;
 	t_philo *philos;
@@ -95,16 +77,38 @@ t_philo	*create_philosophers(t_ctx *ctx)
 		philos[i].name = i + 1;
 		i++;
 	}
+	return (philos);
+}
+
+void	*detach_philos(t_philo *philos)
+{
+	int	i;
+
+	pthread_mutex_destroy(&philos->ctx->printf_lock);
+	i = 0;
+	while (i < philos->ctx->forks)
+	{
+		pthread_mutex_destroy(&philos->right_fork);
+		i++;
+	}
+	free(philos);
+	return (NULL);
+}
+
+t_philo	*create_philosophers(t_ctx *ctx)
+{
+	int i;
+	t_philo *philos;
+	philos = create_forks(ctx);
 	ctx->start_time = ft_time();
 	i = 0;
 	while (i < ctx->forks)
 	{
 		if (pthread_create(&philos[i].thread, NULL, &routine, &philos[i]) != 0)
-		{
-			detach_philos(philos);
-			return NULL;
-		}
+			return (NULL);
+		pthread_detach(philos[i].thread);
 		i++;
 	}
+	detach_philos(philos);
 	return (philos);
 }

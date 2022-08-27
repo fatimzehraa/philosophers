@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 15:52:10 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 21:34:46 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,59 +17,37 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-/*void	routine_helper(t_philo *philosopher)
+void	routine_helper(t_philo *philo)
 {
-	int		name;
+//	int		name;
 	long	start;
 	
-	name = philosopher->name;
-	start = philosopher->ctx->start_time;
-	if (name % 2 == 0)
-	{
-		pthread_mutex_lock(&philosopher->right_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n");
-		pthread_mutex_lock(philosopher->left_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n");
-	}
+//	name = philo->name;
+	start = philo->ctx->start_time;
+	if (philo->name % 2 == 1)
+		pthread_mutex_lock(&philo->right_fork);
 	else
-	{
-		pthread_mutex_lock(philosopher->left_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n");
-		pthread_mutex_lock(&philosopher->right_fork);
-		ft_printf(ft_diff_time(start), philosopher,"%ld %d has taken a fork\n");
-	}
-}*/
+		pthread_mutex_lock(philo->left_fork);
+	ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
+	if (philo->name % 2 == 1)
+		pthread_mutex_lock(philo->left_fork);
+	else
+		pthread_mutex_lock(&philo->right_fork);
+	ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
+}
 
 void	*routine(void *p)
 {
 	t_philo *philo;
 	long	start;
-	//int		name;
 
 	philo = p;
-	//name = philosopher->name;
 	start = philo->ctx->start_time;
 	philo->last_meal = 0;
 	//thinking
-/*	if (philosopher->ctx->forks % 2 == 1 && philosopher->name % 2 == 1)
-	{
-		printf("we gonna sleeeeeep\n");
-		ft_usleep(5);
-	}*/
 	while (1)
 	{
-		//routine_helper(philosopher);
-		if (philo->name % 2 == 1)
-			pthread_mutex_lock(&philo->right_fork);
-		else
-			pthread_mutex_lock(philo->left_fork);
-		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
-		if (philo->name % 2 == 1)
-			pthread_mutex_lock(philo->left_fork);
-		else
-			pthread_mutex_lock(&philo->right_fork);
-		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
-		//wait for his left and right forks to be available
+		routine_helper(philo);
 		//eating
 		philo->last_meal = ft_diff_time(start);
 		philo->meals++;
@@ -82,6 +60,11 @@ void	*routine(void *p)
 	}
 	return (NULL);
 }
+/*
+void	destroy_philo(t_philo philo)
+{
+	
+}*/
 
 t_philo	*create_philosophers(t_ctx *ctx)
 {

@@ -15,10 +15,6 @@ long	ft_diff_time(long start_time)
 	long		timestamp_in_ms;
 
 	timestamp_in_ms = ft_time() - start_time;
-	if (timestamp_in_ms <  0)
-	{
-		printf("%ld - %ld\n", start_time, ft_time());
-	}
 	return (timestamp_in_ms);
 }
 

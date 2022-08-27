@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/16 22:45:26 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:09:43 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,12 @@ int	is_all_number(char **str)
 	}
 	return (1);
 }
-/*
 void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep)
 {
 
 	if (philosopher->ctx->stop != 0)
 		return ;
-	pthread_mutex_lock(&philosopher->ctx->printf_lock);
 	printf(string, timestamp, philosopher->name);
-	pthread_mutex_unlock(&philosopher->ctx->printf_lock);
 	if (sleep > 0)
 		ft_usleep(sleep);
-}*/
+}

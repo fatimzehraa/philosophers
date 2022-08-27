@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/17 18:21:31 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:48:57 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
@@ -31,6 +31,7 @@ typedef struct s_ctx {
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			meals_nb;
+	sem_t		*all_forks;
 //	pthread_mutex_t	printf_lock;
 } t_ctx;
 
@@ -39,8 +40,7 @@ typedef struct s_philo {
 //	pthread_t		thread;
 //	pthread_mutex_t	right_fork;
 //	pthread_mutex_t	*left_fork;
-	sem_t			*forks;
-	pid_t	*pids;
+	pid_t			pid;
 	t_ctx			*ctx;
 	long			last_meal;
 	int				meals;
@@ -56,7 +56,7 @@ long	ft_diff_time(long start_time);
 void	ft_usleep(long time);
 t_philo	*create_philosophers(t_ctx *ctx);
 int	check_dead_philo(t_philo *philos);
-//void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep);
+void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep);
 
 #endif // !PHILOSOPHERS_H
 

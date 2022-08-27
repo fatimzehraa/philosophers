@@ -6,7 +6,7 @@
 #    By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 22:31:22 by fael-bou          #+#    #+#              #
-#    Updated: 2022/08/17 18:30:11 by fael-bou         ###   ########.fr        #
+#    Updated: 2022/08/26 19:29:42 by fael-bou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -pthread
 BUILD_DIR = build
 
-MANDATORY_OBJ = main_bonus.o libft_bonus.o philo_bonus.o args_control_bonus.o time_bonus.o stop_coditions_bonus.o
+MANDATORY_OBJ = main_bonus.o libft_bonus.o philo_bonus.o args_control_bonus.o time_bonus.o stop_conditions_bonus.o
 
 M_OBJ = $(addprefix $(BUILD_DIR)/, $(MANDATORY_OBJ))
 

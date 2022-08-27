@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 01:09:43 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:13:41 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	is_all_number(char **str)
 void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep)
 {
 
-	if (philosopher->ctx->stop != 0)
-		return ;
+//	if (philosopher->ctx->stop != 0)
+//		return ;
 	printf(string, timestamp, philosopher->name);
 	if (sleep > 0)
 		ft_usleep(sleep);

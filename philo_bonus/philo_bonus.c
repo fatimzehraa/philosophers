@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:05:48 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 15:44:26 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:53:02 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ void	do_child(t_philo *philo)
 	long	start;
 
 	start = philo->ctx->start_time;
+	philo->last_meal = 0;
 	while (1)
 	{
 		sem_wait(philo->ctx->all_forks);
 		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
 		sem_wait(philo->ctx->all_forks);
 		ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
-		ft_printf(philo->last_meal, philo,"%ld %d is eating\n", philo->ctx->time_to_eat);
 		philo->last_meal = ft_diff_time(start);
+		ft_printf(philo->last_meal, philo,"%ld %d is eating\n", philo->ctx->time_to_eat);
 		philo->meals++;
 		sem_post(philo->ctx->all_forks);
 		sem_post(philo->ctx->all_forks);
@@ -67,7 +68,7 @@ t_philo	*create_philosophers(t_ctx *ctx)
 	}
 	while (1)
 	{
-		if (waitpid(-1, &status, 0) == -1)
+		if (waitpid(-1, &status, WNOHANG) == -1)
 			break ;
 		if (WIFEXITED(status) == 1)
 			break ;

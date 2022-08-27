@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 21:34:46 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:22:58 by fatimzehra       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ void	*routine(void *p)
 	}
 	return (NULL);
 }
-/*
-void	destroy_philo(t_philo philo)
+
+void	detach_philos(t_philo *philos)
 {
-	
-}*/
+	int	i;
+
+	i = 0;
+	while (i < philos->ctx->forks)
+	{
+		pthread_detach(philos[i].thread);
+		i++;
+	}
+	free(philos);
+}
 
 t_philo	*create_philosophers(t_ctx *ctx)
 {
@@ -92,7 +100,10 @@ t_philo	*create_philosophers(t_ctx *ctx)
 	while (i < ctx->forks)
 	{
 		if (pthread_create(&philos[i].thread, NULL, &routine, &philos[i]) != 0)
+		{
+			detach_philos(philos);
 			return NULL;
+		}
 		i++;
 	}
 	return (philos);

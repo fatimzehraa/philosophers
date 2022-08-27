@@ -1,8 +1,8 @@
 #include "philosophers.h"
 
-long	ft_time()
+long	ft_time(void)
 {
-	long	time;
+	long		time;
 	t_timeval	tv;
 
 	gettimeofday(&tv, NULL);
@@ -34,4 +34,3 @@ void	ft_usleep(long time)
 			break ;
 	}
 }
-

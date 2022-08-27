@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/16 15:53:16 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/27 23:27:22 by fatimzehra       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 
 int	ft_atoi(char *str)
 {
-	int nb = 0;
-	int i = 0;
-	int k = 1;
+	int	nb;
+	int	i;
+	int	k;
 
+	nb = 0;
+	i = 0;
+	k = 1;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
@@ -65,7 +68,6 @@ int	is_all_number(char **str)
 
 void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep)
 {
-
 	if (philosopher->ctx->stop != 0)
 		return ;
 	pthread_mutex_lock(&philosopher->ctx->printf_lock);

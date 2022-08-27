@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 22:57:11 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/27 23:20:33 by fatimzehra       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,9 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-void	routine_helper(t_philo *philo)
-{
-//	int		name;
-	long	start;
-	
-//	name = philo->name;
-	start = philo->ctx->start_time;
-	pthread_mutex_lock(philo->left_fork);
-	pthread_mutex_lock(&philo->right_fork);
-	ft_printf(ft_diff_time(start), philo,"%ld %d has taken a fork\n", -1);
-}
-
 void	*routine(void *p)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	long	start;
 
 	philo = p;
@@ -39,27 +27,28 @@ void	*routine(void *p)
 	philo->last_meal = 0;
 	if (philo->name % 2 == 1)
 		usleep(100);
-	//thinking
 	while (1)
 	{
-		routine_helper(philo);
-		//eating
+		pthread_mutex_lock(philo->left_fork);
+		pthread_mutex_lock(&philo->right_fork);
+		ft_printf(ft_diff_time(start), philo, "%ld %d has taken a fork\n", -1);
 		philo->last_meal = ft_diff_time(start);
 		philo->meals++;
-		ft_printf(philo->last_meal, philo,"%ld %d is eating\n", philo->ctx->time_to_eat);
+		ft_printf(philo->last_meal, philo,
+			"%ld %d is eating\n", philo->ctx->time_to_eat);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(&philo->right_fork);
-		//sleeping
-		ft_printf(ft_diff_time(start), philo,"%ld %d is sleeping\n", philo->ctx->time_to_sleep);
-		ft_printf(ft_diff_time(start), philo,"%ld %d is thinking\n", -1);
+		ft_printf(ft_diff_time(start), philo,
+			"%ld %d is sleeping\n", philo->ctx->time_to_sleep);
+		ft_printf(ft_diff_time(start), philo, "%ld %d is thinking\n", -1);
 	}
 	return (NULL);
 }
 
 t_philo	*create_forks(t_ctx *ctx)
 {
-	int i;
-	t_philo *philos;
+	int		i;
+	t_philo	*philos;
 
 	philos = malloc(ctx->forks * sizeof(t_philo));
 	if (philos == NULL)
@@ -97,8 +86,9 @@ void	*detach_philos(t_philo *philos)
 
 t_philo	*create_philosophers(t_ctx *ctx)
 {
-	int i;
-	t_philo *philos;
+	int		i;
+	t_philo	*philos;
+
 	philos = create_forks(ctx);
 	ctx->start_time = ft_time();
 	i = 0;

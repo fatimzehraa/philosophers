@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 23:20:33 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/29 17:19:10 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*routine(void *p)
 	while (1)
 	{
 		pthread_mutex_lock(philo->left_fork);
+		ft_printf(ft_diff_time(start), philo, "%ld %d has taken a fork\n", -1);
 		pthread_mutex_lock(&philo->right_fork);
 		ft_printf(ft_diff_time(start), philo, "%ld %d has taken a fork\n", -1);
 		philo->last_meal = ft_diff_time(start);

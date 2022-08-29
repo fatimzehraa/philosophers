@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:45:14 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/16 22:45:56 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:20:12 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	get_args(t_ctx *ctx, int ac, char **av)
 	ctx->time_to_die = ft_atoi(av[2]);
 	ctx->time_to_eat = ft_atoi(av[3]);
 	ctx->time_to_sleep = ft_atoi(av[4]);
+	ctx->stop = 0;
 	if (ac == 5)
 		ctx->meals_nb = -1;
 	else if (ac == 6)

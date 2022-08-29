@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:17:43 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/16 22:44:52 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:00:15 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philosophers_bonus.h"
@@ -23,6 +23,5 @@ int main (int ac, char *av[])
 	create_philosophers(&ctx);
 	//if (check_dead_philo(philosophers))
 	//	return (1);
-	exit(0);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 14:48:57 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/29 20:50:30 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
@@ -17,7 +17,7 @@
 # include<stdio.h>
 # include<stdlib.h>
 # include<limits.h>
-//# include<pthread.h>
+# include<pthread.h>
 #include <semaphore.h>
 # include<unistd.h>
 
@@ -32,12 +32,13 @@ typedef struct s_ctx {
 	int			time_to_sleep;
 	int			meals_nb;
 	sem_t		*all_forks;
-//	pthread_mutex_t	printf_lock;
+	sem_t		*all_meals;
+	sem_t		*printf_lock;
 } t_ctx;
 
 typedef struct s_philo {
 	int				name;
-//	pthread_t		thread;
+	pthread_t		check;
 //	pthread_mutex_t	right_fork;
 //	pthread_mutex_t	*left_fork;
 	pid_t			pid;
@@ -54,8 +55,8 @@ void	get_args(t_ctx *ctx, int ac, char **av);
 long	ft_time();
 long	ft_diff_time(long start_time);
 void	ft_usleep(long time);
-t_philo	*create_philosophers(t_ctx *ctx);
-int	check_dead_philo(t_philo *philos);
+void	create_philosophers(t_ctx *ctx);
+int		check_dead_philo(t_philo *philos);
 void	ft_printf(long timestamp, t_philo *philosopher, char *string, int sleep);
 
 #endif // !PHILOSOPHERS_H

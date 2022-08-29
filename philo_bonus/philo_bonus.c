@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:05:48 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/29 22:10:50 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:36:08 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*routine(void *p)
 	{
 		if (philo->last_meal + time_to_die <= ft_diff_time(start))
 		{
+			philo->ctx->stop = 1;
 			printf("\033[1;33m");
 			printf("%ld %d is dead\n", ft_diff_time(start), philo->name);
 			printf("\033[0m");

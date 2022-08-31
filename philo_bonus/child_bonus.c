@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:42:17 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 17:57:23 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:16:05 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philosophers_bonus.h"
@@ -26,9 +26,7 @@ void	*routine(void *p)
 		{
 			sem_wait(philo->ctx->printf_lock);
 			philo->ctx->stop = 1;
-			printf("\033[1;33m");
 			printf("%ld %d died\n", ft_diff_time(start), philo->name);
-			printf("\033[0m");
 			exit (3);
 		}
 	}

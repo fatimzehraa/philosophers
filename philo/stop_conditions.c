@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:36:15 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 17:10:24 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:15:39 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	is_dead(t_philo philos)
 	{
 		philos.ctx->stop = 1;
 		pthread_mutex_lock(&philos.ctx->printf_lock);
-		printf("\033[0;35m");
 		printf("%ld %d died\n", ft_diff_time(start), philos.name);
-		printf("\033[0m");
 		return (1);
 	}
 	else

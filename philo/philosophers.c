@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/29 17:19:10 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:35:19 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*routine(void *p)
 		usleep(100);
 	while (1)
 	{
+		ft_printf(ft_diff_time(start), philo, "%ld %d is thinking\n", -1);
 		pthread_mutex_lock(philo->left_fork);
 		ft_printf(ft_diff_time(start), philo, "%ld %d has taken a fork\n", -1);
 		pthread_mutex_lock(&philo->right_fork);
@@ -41,7 +42,6 @@ void	*routine(void *p)
 		pthread_mutex_unlock(&philo->right_fork);
 		ft_printf(ft_diff_time(start), philo,
 			"%ld %d is sleeping\n", philo->ctx->time_to_sleep);
-		ft_printf(ft_diff_time(start), philo, "%ld %d is thinking\n", -1);
 	}
 	return (NULL);
 }
@@ -70,7 +70,7 @@ t_philo	*create_forks(t_ctx *ctx)
 	return (philos);
 }
 
-void	*detach_philos(t_philo *philos)
+void	*destroy_philos(t_philo *philos)
 {
 	int	i;
 
@@ -100,6 +100,5 @@ t_philo	*create_philosophers(t_ctx *ctx)
 		pthread_detach(philos[i].thread);
 		i++;
 	}
-	detach_philos(philos);
 	return (philos);
 }

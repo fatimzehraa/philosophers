@@ -1,0 +1,92 @@
+[
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "main_bonus.c",
+   "-o",
+   "build/main_bonus.o"
+  ],
+  "file": "main_bonus.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "libft_bonus.c",
+   "-o",
+   "build/libft_bonus.o"
+  ],
+  "file": "libft_bonus.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "philo_bonus.c",
+   "-o",
+   "build/philo_bonus.o"
+  ],
+  "file": "philo_bonus.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "args_control_bonus.c",
+   "-o",
+   "build/args_control_bonus.o"
+  ],
+  "file": "args_control_bonus.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "time_bonus.c",
+   "-o",
+   "build/time_bonus.o"
+  ],
+  "file": "time_bonus.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/philosophers/philo_bonus",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "stop_conditions_bonus.c",
+   "-o",
+   "build/stop_conditions_bonus.o"
+  ],
+  "file": "stop_conditions_bonus.c"
+ }
+]

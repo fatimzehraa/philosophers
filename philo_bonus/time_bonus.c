@@ -6,15 +6,15 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:01:03 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/16 22:46:28 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:06:36 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-long	ft_time()
+long	ft_time(void)
 {
-	long	time;
+	long		time;
 	t_timeval	tv;
 
 	gettimeofday(&tv, NULL);
@@ -27,10 +27,8 @@ long	ft_diff_time(long start_time)
 	long		timestamp_in_ms;
 
 	timestamp_in_ms = ft_time() - start_time;
-	if (timestamp_in_ms <  0)
-	{
+	if (timestamp_in_ms < 0)
 		printf("%ld - %ld\n", start_time, ft_time());
-	}
 	return (timestamp_in_ms);
 }
 
@@ -50,4 +48,3 @@ void	ft_usleep(long time)
 			break ;
 	}
 }
-

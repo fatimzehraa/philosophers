@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:56:10 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 23:38:09 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/31 17:35:13 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILOSOPHERS_H
@@ -54,5 +54,6 @@ t_philo	*create_philosophers(t_ctx *ctx);
 int		check_dead_philo(t_philo *philos);
 void	ft_printf(long timestamp,
 			t_philo *philosopher, char *string, int sleep);
+void	*destroy_philos(t_philo *philos);
 
 #endif // !PHILOSOPHERS_H

@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/27 23:27:22 by fatimzehra       ###   ########.fr       */
+/*   Updated: 2022/08/31 17:16:42 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ int	ft_atoi(char *str)
 	return (k * nb);
 }
 
-int	is_all_number(char **str)
+int	is_all_number(char **strs)
 {
 	int		i;
 	int		j;
 	long	n;
 
 	i = 0;
-	while (str[i])
+	while (strs[i])
 	{
+		if (*strs[i] == '\0')
+			return 0;
 		j = 0;
-		if (str[i][j] == '-' || str[i][j] == '+')
-			j++;
-		while (str[i][j])
+		while (strs[i][j])
 		{
-			if (str[i][j] < '0' || str[i][j] > '9')
+			if (strs[i][j] < '0' || strs[i][j] > '9')
 				return (0);
 			j++;
 		}
-		n = ft_atoi(str[i]);
+		n = ft_atoi(strs[i]);
 		if (n > INT_MAX || n < INT_MIN)
 			return (0);
 		i++;

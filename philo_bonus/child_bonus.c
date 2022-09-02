@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:42:17 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 18:16:05 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:51:59 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philosophers_bonus.h"
@@ -45,7 +45,6 @@ void	do_child(t_philo *philo)
 	while (1)
 	{
 		ft_printf(ft_diff_time(start), philo, "%ld %d is thinking\n", -1);
-		ft_printf(ft_diff_time(start), philo, "%ld %d is thinking\n", 0);
 		sem_wait(philo->ctx->all_forks);
 		ft_printf(ft_diff_time(start), philo, "%ld %d has taken a fork\n", -1);
 		sem_wait(philo->ctx->all_forks);

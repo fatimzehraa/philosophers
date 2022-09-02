@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:43:29 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 17:18:18 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:08:30 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	is_all_number(char **strs)
 	while (strs[i])
 	{
 		if (*strs[i] == '\0')
-			return 0;
+			return (0);
 		j = 0;
 		while (strs[i][j])
 		{
@@ -62,7 +62,8 @@ int	is_all_number(char **strs)
 		n = ft_atoi(strs[i]);
 		if (n > INT_MAX || n < INT_MIN)
 			return (0);
-		i++;}
+		i++;
+	}
 	return (1);
 }
 

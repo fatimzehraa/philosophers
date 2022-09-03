@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:51:58 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 17:51:09 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:18:31 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(int ac, char *av[])
 		return (-1);
 	get_args(&ctx, ac, av);
 	philosophers = create_philosophers(&ctx);
+	if (philosophers == NULL)
+		return (1);
 	dead = check_dead_philo(philosophers);
 	destroy_philos(philosophers);
 	return (dead);

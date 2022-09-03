@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:19:06 by fael-bou          #+#    #+#             */
-/*   Updated: 2022/08/31 17:35:19 by fael-bou         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:15:45 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_philo	*create_philosophers(t_ctx *ctx)
 	while (i < ctx->forks)
 	{
 		if (pthread_create(&philos[i].thread, NULL, &routine, &philos[i]) != 0)
-			return (NULL);
+			return (destroy_philos(philos), NULL);
 		pthread_detach(philos[i].thread);
 		i++;
 	}
